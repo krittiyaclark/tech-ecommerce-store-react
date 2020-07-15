@@ -24,15 +24,57 @@ const CartProvider = ({ children }) => {
 	}, [cart])
 
 	//  Remove Item
-	const removeItem = (id) => {}
+	const removeItem = (id) => {
+		let newCart = [...cart].filter((item) => item.id !== id)
+		setCart(newCart)
+		// setCart([...cart].filter((item) => item.id !== id))
+	}
 	//  Increase Amount
-	const increaseAmount = (id) => {}
-	//  decreaseAmount
-	const decreaseAmount = (id) => {}
+	const increaseAmount = (id) => {
+		const newCart = [...cart].map((item) => {
+			return item.id === id ? { ...item, amount: item.amount + 1 } : { ...item }
+		})
+		setCart(newCart)
+	}
+	//  decrease Amount
+	const decreaseAmount = (id, amount) => {
+		if (amount === 1) {
+			removeItem(id)
+			return
+		} else {
+			const newCart = [...cart].map((item) => {
+				return item.id === id
+					? { ...item, amount: item.amount - 1 }
+					: { ...item }
+			})
+			setCart(newCart)
+		}
+	}
+
 	//  addToCart
-	const addToCart = (product) => {}
+	const addToCart = (product) => {
+		const {
+			id,
+			image: { url },
+			title,
+			price,
+		} = product
+		// find if it already in the cart
+		const item = [...cart].find((item) => item.id === id)
+		// if it already in the cart, increaseAmount
+		if (item) {
+			increaseAmount(id)
+			return
+		} else {
+			const newItem = { id, image: url, title, price, amount: 1 }
+			const newCart = [...cart, newItem]
+			setCart(newCart)
+		}
+	}
 	//  clearCart
-	const clearCart = () => {}
+	const clearCart = () => {
+		setCart([])
+	}
 
 	return (
 		<CartContext.Provider
