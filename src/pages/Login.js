@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 // Strapi function
@@ -11,7 +11,8 @@ const Login = () => {
 	const history = useHistory()
 
 	// setup user context
-
+	const { userLogin } = useContext(UserContext)
+	// console.log(value)
 	// state values
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -38,8 +39,14 @@ const Login = () => {
 			response = await registerUser({ email, password, username })
 		}
 		if (response) {
-			//
-			console.log('success')
+			const {
+				jwt: token,
+				user: { username },
+			} = response.data
+			const newUser = { token, username }
+
+			userLogin(newUser)
+			history.push('/products')
 			console.log(response)
 		} else {
 			// show alert
