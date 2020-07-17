@@ -59,12 +59,7 @@ const CartProvider = ({ children }) => {
 
 	//  addToCart
 	const addToCart = (product) => {
-		const {
-			id,
-			image: { url },
-			title,
-			price,
-		} = product
+		const { id, image, title, price } = product
 		// find if it already in the cart
 		const item = [...cart].find((item) => item.id === id)
 		// if it already in the cart, increaseAmount
@@ -72,7 +67,7 @@ const CartProvider = ({ children }) => {
 			increaseAmount(id)
 			return
 		} else {
-			const newItem = { id, image: url, title, price, amount: 1 }
+			const newItem = { id, image, title, price, amount: 1 }
 			const newCart = [...cart, newItem]
 			setCart(newCart)
 		}

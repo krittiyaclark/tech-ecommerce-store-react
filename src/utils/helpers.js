@@ -4,9 +4,10 @@ import url from './URL'
 export const flatternProducts = (data) => {
 	return data.map((item) => {
 		// cloudinary
-		// let image = item.image.url
+		let image = item.image.url
 		// local setup no deployment
-		let image = `${url}${item.image.url}`
+		// let image = `${url}${item.image.url}`
+
 		return { ...item, image }
 	})
 }
