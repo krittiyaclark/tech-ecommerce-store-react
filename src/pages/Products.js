@@ -7,7 +7,7 @@ import ProductList from '../components/Products/ProductList'
 
 const Products = () => {
 	const { loading, products } = useContext(ProductsContext)
-	console.log(products)
+	// console.log(products)
 
 	if (loading) {
 		return <Loading />
