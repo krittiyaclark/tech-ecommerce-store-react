@@ -11,15 +11,16 @@ const Login = () => {
 	const history = useHistory()
 
 	// setup user context
-	const { userLogin } = useContext(UserContext)
+	const { userLogin, alert, showAlert } = useContext(UserContext)
 	// console.log(value)
 	// state values
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [username, setUsername] = useState('default')
 	const [isMember, setIsMember] = useState(true)
+	// prevent click on the submit button many time by Hide the submit button with alert.show
 
-	let isEmpty = !email || !password || !username
+	let isEmpty = !email || !password || !username || alert.show
 
 	const toggleMember = () => {
 		setIsMember((prevMember) => {
@@ -30,13 +31,24 @@ const Login = () => {
 	}
 
 	const handleSubmit = async (event) => {
+		// prevent click on the submit button many time by Hide the submit button
+		showAlert({
+			msg: 'accessing user data. please wait...',
+		})
 		// alert
 		event.preventDefault()
 		let response
 		if (isMember) {
-			response = await loginUser({ email, password })
+			response = await loginUser({
+				email,
+				password,
+			})
 		} else {
-			response = await registerUser({ email, password, username })
+			response = await registerUser({
+				email,
+				password,
+				username,
+			})
 		}
 		if (response) {
 			const {
@@ -46,10 +58,18 @@ const Login = () => {
 			const newUser = { token, username }
 
 			userLogin(newUser)
+			showAlert({
+				msg: `you are logged in : ${username}. shop away my friend`,
+			})
+
 			history.push('/products')
 			console.log(response)
 		} else {
 			// show alert
+			showAlert({
+				msg: 'there was an error. please try again...',
+				type: 'danger',
+			})
 		}
 	}
 

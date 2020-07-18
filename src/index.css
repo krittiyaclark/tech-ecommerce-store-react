@@ -558,3 +558,53 @@ Login Button
 		margin: 0 0.5rem;
 	}
 }
+
+/* 
+====== 
+Alert
+======
+*/
+.alert-container {
+	position: fixed;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: none;
+	z-index: 10;
+	background: green;
+	width: 24rem;
+	padding: 2.5rem 1.5rem;
+	text-align: center;
+	color: var(--mainWhite);
+	font-size: 1.2rem;
+	font-weight: bold;
+	text-transform: capitalize;
+	letter-spacing: var(--mainSpacing);
+	border-radius: var(--mainBorderRadius);
+	transition: all 0.3s linear;
+}
+.alert-show {
+	display: block;
+}
+.alert-center {
+	position: relative;
+}
+.alert p {
+	margin-bottom: 0;
+	line-height: 2;
+}
+.alert-danger {
+	background: var(--mainRed);
+}
+.alert-close {
+	color: var(--mainWhite);
+	font-size: 1.5rem;
+	background: transparent;
+	border: none;
+	display: inline-block;
+	position: absolute;
+	top: 5px;
+	right: 7px;
+	cursor: pointer;
+	line-height: 0;
+}
