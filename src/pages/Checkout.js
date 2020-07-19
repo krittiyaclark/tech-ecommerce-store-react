@@ -17,12 +17,41 @@ const Checkout = (props) => {
 	const { user, showAlert, hideAlert, alert } = useContext(UserContext)
 	const history = useHistory()
 	// state values
-	const [name, setName] = React.useState('')
-	const [error, setError] = React.useState('')
+	const [name, setName] = useState('')
+	const [error, setError] = useState('')
 	const isEmpty = !name || alert.show
 
 	const handleSubmit = async function (event) {
+		showAlert({ msg: 'submitting order... please wait' })
 		event.preventDefault()
+		const response = await props.stripe
+			.createToken()
+			.catch((error) => console.log(error))
+
+		const { token } = response
+
+		if (token) {
+			setError('')
+			const { id } = token
+
+			let order = await submitOrder({
+				name: name,
+				total: total,
+				items: cart,
+				stripeTokenId: id,
+				userToken: user.token,
+			})
+
+			if (order) {
+				showAlert({ msg: 'your order is complete' })
+				clearCart()
+				history.push('/')
+				return
+			}
+		} else {
+			hideAlert()
+			setError(response.error.message)
+		}
 	}
 
 	if (cart.length < 1) return <EmptyCart />
@@ -60,6 +89,7 @@ const Checkout = (props) => {
 				</div>
 				{/* end of card element */}
 				{/* STRIPE ELEMENTS */}
+				<CardElement className='card-element'></CardElement>
 				{/* stripe errors */}
 				{error && <p className='form-empty'>{error}</p>}
 				{/* empty value */}
@@ -78,4 +108,15 @@ const Checkout = (props) => {
 	)
 }
 
-export default Checkout
+const CardForm = injectStripe(Checkout)
+
+const StripeWrapper = () => {
+	return (
+		<StripeProvider apiKey='pk_test_pIVhIvfxfXwvPDNMMyHKBYdZ00L5BStZ2e'>
+			<Elements>
+				<CardForm></CardForm>
+			</Elements>
+		</StripeProvider>
+	)
+}
+export default StripeWrapper
