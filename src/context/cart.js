@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useReducer } from 'react'
 // import localCart from '../utils/localCart'
 import reducer from './reducer'
+import { REMOVE, INCREASE, DECREASE, ADD_TO_CART, CLEAR_CART } from './actions'
+
 const getCartFormLocalStorage = () => {
 	return localStorage.getItem('cart')
 		? JSON.parse(localStorage.getItem('cart'))
@@ -32,19 +34,19 @@ const CartProvider = ({ children }) => {
 
 	//  Remove Item
 	const removeItem = (id) => {
-		dispatch({ type: 'REMOVE', payload: id })
+		dispatch({ type: REMOVE, payload: id })
 	}
 	//  Increase Amount
 	const increaseAmount = (id) => {
-		dispatch({ type: 'INCREASE', payload: id })
+		dispatch({ type: INCREASE, payload: id })
 	}
 	//  decrease Amount
 	const decreaseAmount = (id, amount) => {
 		if (amount === 1) {
-			dispatch({ type: 'REMOVE', payload: id })
+			dispatch({ type: REMOVE, payload: id })
 			return
 		} else {
-			dispatch({ type: 'DECREASE', payload: id })
+			dispatch({ type: DECREASE, payload: id })
 		}
 	}
 
@@ -53,14 +55,14 @@ const CartProvider = ({ children }) => {
 		let item = [...cart].find((item) => item.id === product.id)
 		// if it already in the cart, increaseAmount
 		if (item) {
-			dispatch({ type: 'INCREASE', payload: product.id })
+			dispatch({ type: INCREASE, payload: product.id })
 		} else {
-			dispatch({ type: 'ADDTOCART', payload: product })
+			dispatch({ type: ADD_TO_CART, payload: product })
 		}
 	}
 	//  clearCart
 	const clearCart = () => {
-		dispatch({ type: 'CLEARCART' })
+		dispatch({ type: CLEAR_CART })
 	}
 
 	return (
