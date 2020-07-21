@@ -5,7 +5,7 @@ import Loading from '../Loading'
 import ProductList from './ProductList'
 
 const FeaturedProducts = () => {
-	console.log(useContext(ProductsContext))
+	// console.log(useContext(ProductsContext))
 	const { loading, featured } = useContext(ProductsContext)
 
 	if (loading) {

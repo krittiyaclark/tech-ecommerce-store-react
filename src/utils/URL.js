@@ -1,4 +1,4 @@
 // url
-export default 'http://localhost:1337'
+export default 'https://vintage-react-tech-store-api.herokuapp.com'
 
 // local

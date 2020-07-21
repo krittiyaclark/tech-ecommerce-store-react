@@ -5,8 +5,8 @@ import { CartContext } from '../../context/cart'
 
 const CartItem = ({ price, image, id, title, amount }) => {
 	// cart context
-	const data = React.useContext(CartContext)
-	console.log(data)
+	// const data = React.useContext(CartContext)
+	// console.log(data)
 	const { removeItem, increaseAmount, decreaseAmount } = useContext(CartContext)
 
 	return (
