@@ -14,6 +14,7 @@ Variables
 	/* --primaryDarkColor: #4e1d51; */
 	--primaryColor: #f15025;
 	--primaryDarkColor: #c02c03;
+	--primaryHeroColor: #ffffff;
 	--primaryFont: 'Catamaran', sans-serif;
 	--slantedFont: 'Kaushan Script', cursive;
 	--mainWhite: #fff;
@@ -251,11 +252,11 @@ Hero
 			rgba(0, 0, 0, 0.7) 50%,
 			rgba(255, 255, 255, 0.1)
 		),
-		url('./assets/mainBcg.jpeg') center/cover no-repeat;
+		url('./assets/Apple_Mac_Vintage_Computer.png') center/cover no-repeat;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: var(--primaryDarkColor);
+	color: var(--primaryHeroColor);
 }
 .banner {
 	width: var(--smallWidth);
