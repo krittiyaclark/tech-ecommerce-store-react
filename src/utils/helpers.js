@@ -6,8 +6,8 @@ export const flatternProducts = (data) => {
 		// cloudinary
 		let image = (item.image && item.image.url) || null
 		// local setup no deployment
-		// let image = `${url}${item.image.url}`
 
+		// let image = `${url}${item.image.url}`
 		return { ...item, image }
 	})
 }
@@ -17,4 +17,9 @@ export const featuredProducts = (data) => {
 	return data.filter((item) => {
 		return item.featured === true
 	})
+}
+
+// paginate
+export const paginate = (products) => {
+	return products
 }
