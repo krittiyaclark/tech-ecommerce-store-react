@@ -21,5 +21,12 @@ export const featuredProducts = (data) => {
 
 // paginate
 export const paginate = (products) => {
-	return products
+	// Array products passed by setSorted(paginate(products)) from Context/products.js
+	const itemsPerPage = 4
+	const numberOfPages = Math.ceil(products.length / itemsPerPage)
+	const newProducts = Array.from({ length: numberOfPages }, () => {
+		return products.splice(0, itemsPerPage)
+	})
+	console.log(newProducts)
+	return newProducts
 }
