@@ -1,12 +1,16 @@
 # tech e-commerce store
 
 This e-commerce application using React, Strapi, React Router, Stripe,
-React-bootstrap and deploy the application on Heroku.
+React-bootstrap and deploy the application on Netlify.
 
 ## How to clone
 
 Run this command
 `git clone https://github.com/krittiyaclark/tech-ecommerce-store-react.git`
+
+## View live demo
+
+[live demo](https://tech-ecommerce-store-react.netlify.app)
 
 ## Install dependencies
 
